@@ -1,3 +1,5 @@
+<!-- PR title format: KW-N: description (e.g. "KW-14: add issue key enforcement") -->
+
 ## Summary
 
 <!-- What does this PR do? Keep it to 1-3 sentences. -->

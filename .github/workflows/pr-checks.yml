@@ -1,0 +1,58 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-pr-title:
+    name: Validate PR Title
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
+    steps:
+      - name: Check for KW-N in PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ "$PR_TITLE" =~ KW-[0-9]+ ]]; then
+            echo "PR title contains issue key: ${BASH_REMATCH[0]}"
+          else
+            echo "::error::PR title must contain a KW-N issue key (e.g. 'KW-14: add feature X')"
+            echo ""
+            echo "Current title: $PR_TITLE"
+            echo ""
+            echo "Create an issue at https://github.com/${{ github.repository }}/issues/new"
+            echo "then reference it in your PR title."
+            exit 1
+          fi
+
+  validate-branch-name:
+    name: Validate Branch Name
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
+    steps:
+      - name: Check branch name format
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          if [[ "$BRANCH" == "main" ]]; then
+            echo "Main branch, skipping."
+            exit 0
+          fi
+
+          pattern='^(feat|fix|chore|docs|refactor|test)/KW-[0-9]+-[a-z0-9-]+$'
+
+          if [[ "$BRANCH" =~ $pattern ]]; then
+            echo "Branch name is valid: $BRANCH"
+          else
+            echo "::error::Branch name must match: type/KW-N-kebab-description"
+            echo ""
+            echo "Current branch: $BRANCH"
+            echo ""
+            echo "Valid prefixes: feat, fix, chore, docs, refactor, test"
+            echo "Examples:"
+            echo "  feat/KW-3-implement-platform-web"
+            echo "  fix/KW-7-key-registry-null-user"
+            echo "  chore/KW-14-issue-key-enforcement"
+            exit 1
+          fi
