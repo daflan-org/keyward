@@ -48,12 +48,13 @@ Use the [Feature Request](https://github.com/daflan-org/keyward/issues/new?templ
 
 ### Submitting Code
 
-1. Fork the repo and create a branch from `main`
-2. Name your branch using the convention below
-3. If you added code, add tests
-4. Ensure `yarn build`, `yarn test`, and `yarn lint` pass
-5. Write a clear PR description using the PR template
-6. Submit your pull request
+1. Open (or find) a GitHub issue for your work
+2. Fork the repo and create a branch from `main` using the `KW-N` naming convention below
+3. Reference the issue key (`KW-N`) in your branch name, commit messages, and PR title
+4. If you added code, add tests
+5. Ensure `yarn build`, `yarn test`, and `yarn lint` pass
+6. Write a clear PR description using the PR template
+7. Submit your pull request
 
 ## Branch Strategy
 
@@ -61,10 +62,10 @@ We use **GitHub Flow**: `main` is always stable and releasable. All work happens
 
 ```
 main (stable, always releasable)
-  ├── feat/add-wipe-device
-  ├── fix/key-registry-slash-escape
-  ├── chore/upgrade-biome
-  └── docs/add-android-guide
+  ├── feat/KW-3-implement-platform-web
+  ├── fix/KW-7-key-registry-slash-escape
+  ├── chore/KW-14-issue-key-enforcement
+  └── docs/KW-5-add-android-guide
 ```
 
 ### Rules
@@ -86,10 +87,12 @@ main (stable, always releasable)
 | `refactor/` | Code restructuring with no behavior change |
 | `test/` | Adding or updating tests only |
 
-Format: `prefix/short-kebab-description`
+Format: `prefix/KW-N-kebab-description`
 
-Good: `feat/add-wipe-device`, `fix/key-registry-null-user`, `chore/biome-3-upgrade`
-Bad: `my-branch`, `update`, `fix2`
+Every branch must reference a GitHub issue number using the `KW-N` format. This is enforced by CI.
+
+Good: `feat/KW-3-implement-platform-web`, `fix/KW-7-key-registry-null-user`, `chore/KW-14-issue-key-enforcement`
+Bad: `my-branch`, `feat/add-feature`, `fix2`
 
 ### Releases
 
@@ -109,15 +112,20 @@ While in v0.x, minor versions may contain breaking changes.
 
 ### Commit Messages
 
-Write clear, concise commit messages. Use present tense ("add feature" not "added feature"). Focus on why, not what.
+Every commit message must contain a `KW-N` issue key. This is enforced by a local git hook (installed automatically via `yarn install`).
+
+Write clear, concise messages. Use present tense ("add feature" not "added feature"). Focus on why, not what.
 
 Good:
-- `add wipeUser support for device-scoped keys`
-- `fix KeyRegistry crash when userId contains slashes`
+- `KW-3: add wipeUser support for device-scoped keys`
+- `fix KeyRegistry crash when userId contains slashes (KW-7)`
 
 Bad:
 - `update code`
 - `fix bug`
+- `add feature` (missing KW-N reference)
+
+Merge commits, reverts, fixups, and squashes are exempt from the KW-N requirement. Use `--no-verify` to bypass the hook during legacy rebases.
 
 ## Code Style
 

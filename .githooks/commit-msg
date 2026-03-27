@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Validates that commit messages contain a KW-N issue key.
+# Installed via: git config core.hooksPath .githooks
+
+msg_file="$1"
+
+case "$(head -n1 "$msg_file")" in
+  Merge\ *|Revert\ *|fixup!\ *|squash!\ *)
+    exit 0
+    ;;
+esac
+
+if grep -qE 'KW-[0-9]+' "$msg_file"; then
+  exit 0
+fi
+
+echo ""
+echo "ERROR: Commit message must contain a KW-N issue key."
+echo ""
+echo "Examples:"
+echo "  KW-14: add issue key enforcement"
+echo "  fix user lookup crash (KW-7)"
+echo ""
+echo "Use --no-verify to bypass (e.g. during legacy rebase)."
+exit 1
