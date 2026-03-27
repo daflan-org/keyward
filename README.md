@@ -1,21 +1,26 @@
 # Keyward
 
-Cross-platform, user-scoped secure key-value storage with codegen.
+Secure key management for client-side apps. One SDK across iOS, Android, and Web.
 
-Native implementations for iOS (Keychain), Android (Keystore + EncryptedSharedPreferences), and Web (IndexedDB). A single JSON config defines all storage keys with their scope; a codegen CLI generates type-safe accessors for TypeScript, Swift, and Java.
+Keyward handles two problems that every mobile and web app faces but no single tool solves today:
+
+1. **On-device secrets have no user isolation.** Existing storage solutions use global keys. When users switch accounts on the same device, data leaks between them.
+2. **API keys ship inside your bundle.** Stripe keys, Sentry DSNs, and other secrets get baked into client builds where anyone can extract them.
 
 ## Why Keyward?
 
-Every existing secure storage solution uses global keys:
+### Problem 1: User-Scoped Secure Storage
+
+Every secure storage library stores keys globally:
 
 ```
 auth_token = "jwt..."           # Which user's token?
 e2ee_private_key = "abc..."     # Which user's key?
 ```
 
-When User A signs out and User B signs in on the same device, User B can see User A's data. Account deletion requires manually enumerating every key.
+User A signs out, User B signs in: User B sees User A's encryption keys. Account deletion requires manually enumerating every key. Nobody builds user isolation because it's "just a prefix" until you need to wipe a user, rotate keys, or support multi-account.
 
-Keyward solves this with scoped key prefixes:
+Keyward makes scoping a first-class concept with native implementations (Keychain, Keystore, IndexedDB):
 
 ```
 u/507f1f/auth_token             # User 507f1f's token
@@ -24,18 +29,25 @@ d/installation_id               # This device's ID
 language                        # Global app setting
 ```
 
-Switch users with `setUserId()`. Wipe a user with `wipeUser(userId)`. Zero manual enumeration, zero missed keys.
+`setUserId()` to switch context. `wipeUser(userId)` to delete everything for a user. Zero manual enumeration.
 
-### No Equivalent Exists
+### Problem 2: Client-Side API Key Security
+
+Developers put API keys in `.env` files. Build tools bundle them into the app. Anyone with a decompiler or network inspector can extract them. The alternatives are backend proxies (per-API infra overhead) or platform-specific obfuscation (fragile, not cross-platform).
+
+Keyward Cloud (coming soon) delivers secrets at runtime: keys never exist in your bundle. Register them in a dashboard, fetch them on app start via authenticated request, store them in secure storage. Rotate or revoke from the dashboard with zero app updates.
+
+### Nothing Else Does Both
 
 | Existing Solution | Limitation |
 |---|---|
 | expo-secure-store | Expo-locked, no web, no user scoping |
 | react-native-keychain | RN-locked, no web, no user scoping |
 | @capacitor-community/secure-storage | Capacitor-locked, no user scoping |
-| Infisical, dotenv-vault | Server/CI only, no client-side runtime delivery |
+| Infisical, dotenv-vault | Server/CI only, build-time, no mobile runtime delivery |
+| AWS KMS, HashiCorp Vault | Infrastructure secrets, not for client-side apps |
 
-Keyward is **framework-agnostic**, **cross-platform**, and provides **user-scoped key isolation** out of the box.
+Keyward is **framework-agnostic**, **cross-platform**, and provides **user-scoped key isolation** and **runtime secret delivery** from a single SDK.
 
 ## Packages
 
@@ -48,64 +60,18 @@ Keyward is **framework-agnostic**, **cross-platform**, and provides **user-scope
 | `platform-ios` | Swift Keychain implementation | SPM |
 | `platform-android` | Java Keystore implementation | Maven |
 
-## Quick Start
+## Getting Started
 
-### 1. Install
+Pick the package for your platform:
 
-```bash
-yarn add @keyward/capacitor @keyward/codegen
-npx cap sync
-```
+| Platform | Install | Guide |
+|---|---|---|
+| Capacitor (iOS + Android + Web) | `yarn add @keyward/capacitor` | [packages/capacitor](packages/capacitor/) |
+| Web only | `yarn add @keyward/platform-web` | [packages/platform-web](packages/platform-web/) |
+| iOS native (Swift) | SPM: `github.com/daflan-org/keyward` | [packages/platform-ios](packages/platform-ios/) |
+| Android native (Java/Kotlin) | Maven: `org.keyward:platform-android` | [packages/platform-android](packages/platform-android/) |
 
-### 2. Define Keys
-
-Create `keyward.keys.json` in your project root:
-
-```json
-{
-  "output": {
-    "ts": "src/generated/KeywardKeys.ts",
-    "swift": "ios/App/Generated/KeywardKeys.swift"
-  },
-  "keys": {
-    "AUTH_TOKEN":    { "key": "auth_token", "scope": "user" },
-    "THEME":         { "key": "theme", "scope": "user" },
-    "INSTALL_ID":    { "key": "installation_id", "scope": "device" },
-    "LANGUAGE":      { "key": "language", "scope": "global" },
-    "FAMILY_KEY":    { "key": "family.{familyId}.key", "scope": "user" }
-  }
-}
-```
-
-### 3. Generate
-
-```bash
-npx keyward-codegen --config keyward.keys.json
-```
-
-This generates type-safe accessors. Dynamic keys like `{familyId}` become function parameters.
-
-### 4. Use
-
-```typescript
-import { createKeyward } from '@keyward/capacitor';
-import { KeywardKeys } from './generated/KeywardKeys';
-
-const keyward = createKeyward(Capacitor.getPlatform());
-
-// Set active user
-keyward.setUserId(user._id);
-
-// Read/write scoped keys
-await keyward.set(KeywardKeys.AUTH_TOKEN, token);
-const theme = await keyward.get(KeywardKeys.THEME);
-
-// Dynamic keys
-await keyward.set(KeywardKeys.FAMILY_KEY('fam_123'), encryptedKey);
-
-// Wipe all data for a user
-await keyward.wipeUser(user._id);
-```
+All platforms share the same concepts:
 
 ### Scope Model
 
@@ -114,6 +80,17 @@ await keyward.wipeUser(user._id);
 | `user` | `u/{userId}/` | Auth tokens, encryption keys, preferences |
 | `device` | `d/` | Installation ID, device fingerprint |
 | `global` | _(none)_ | Language, onboarding flag, API base URL |
+
+### Codegen
+
+Define your keys once, generate type-safe accessors for TypeScript, Swift, and Java:
+
+```bash
+yarn add -D @keyward/codegen
+npx keyward-codegen --config keyward.keys.json
+```
+
+One `keyward.keys.json` produces constants and factory functions in every target language. Dynamic keys (`{familyId}`) become typed function parameters. See [packages/codegen](packages/codegen/) for config format and generated output examples.
 
 ## Development
 
