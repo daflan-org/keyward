@@ -2,11 +2,11 @@ name: PR Checks
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, reopened]
+    types: [opened, edited, reopened]
 
 jobs:
-  validate-pr-title:
-    name: Validate PR Title
+  validate-pr:
+    name: Validate PR Title & Branch
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
     steps:
@@ -26,11 +26,6 @@ jobs:
             exit 1
           fi
 
-  validate-branch-name:
-    name: Validate Branch Name
-    runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
-    steps:
       - name: Check branch name format
         env:
           BRANCH: ${{ github.head_ref }}
@@ -40,7 +35,7 @@ jobs:
             exit 0
           fi
 
-          pattern='^(feat|fix|chore|docs|refactor|test)/KW-[0-9]+-[a-z0-9-]+$'
+          pattern='^(feat|fix|chore|docs|refactor|test)/KW-[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$'
 
           if [[ "$BRANCH" =~ $pattern ]]; then
             echo "Branch name is valid: $BRANCH"

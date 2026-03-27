@@ -4,10 +4,8 @@
 # Installed via: git config core.hooksPath .githooks
 
 msg_file="$1"
-first_line=$(head -n1 "$msg_file")
 
-# Skip automated commit types
-case "$first_line" in
+case "$(head -n1 "$msg_file")" in
   Merge\ *|Revert\ *|fixup!\ *|squash!\ *)
     exit 0
     ;;
