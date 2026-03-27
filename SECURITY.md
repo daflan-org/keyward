@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in Keyward, please report it responsibly.
 
-**Do not open a public issue.** Instead, email **security@keyward.org** with:
+**Do not open a public issue.** Instead, email **info@daflan.com** with:
 
 - Description of the vulnerability
 - Steps to reproduce
