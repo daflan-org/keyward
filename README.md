@@ -83,14 +83,16 @@ All platforms share the same concepts:
 
 ### Codegen
 
-Define your keys once, generate type-safe accessors for TypeScript, Swift, and Java:
+Define your keys once in `keyward.keys.json`, generate type-safe accessors for every platform. The codegen CLI is distributed via npm but the output is platform-agnostic:
 
-```bash
-yarn add -D @keyward/codegen
-npx keyward-codegen --config keyward.keys.json
-```
+| Ecosystem | Install codegen | Output |
+|---|---|---|
+| Node (npm/yarn) | `npx @keyward/codegen --config keyward.keys.json` | TypeScript constants |
+| iOS (Swift) | Run via npx or brew (planned) | Swift enum |
+| Android (Java/Kotlin) | Run via npx or Gradle task (planned) | Java class |
+| Flutter (Dart) | Run via npx or pub (planned) | Dart class |
 
-One `keyward.keys.json` produces constants and factory functions in every target language. Dynamic keys (`{familyId}`) become typed function parameters. See [packages/codegen](packages/codegen/) for config format and generated output examples.
+One config, every language. Dynamic keys (`{familyId}`) become typed function parameters. See [packages/codegen](packages/codegen/) for config format and generated output examples.
 
 ## Development
 
