@@ -1,1 +1,1 @@
-export { createKeyward } from './plugin.js';
+// placeholder: Capacitor bridge will be added in implementation phase

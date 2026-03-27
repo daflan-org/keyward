@@ -9,4 +9,6 @@ node_modules
 .pnp.*
 dist
 *.tsbuildinfo
+.build/
+.turbo/
 local/

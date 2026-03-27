@@ -9,6 +9,10 @@
       "dependsOn": ["build"]
     },
     "lint": {},
+    "lint:fix": {},
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
     "clean": {
       "cache": false
     }

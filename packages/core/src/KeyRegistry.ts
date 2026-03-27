@@ -1,4 +1,5 @@
-import { Scope, type StorageKeyDef } from './types.js';
+import type { StorageKeyDef } from './types.js';
+import { Scope } from './types.js';
 
 export class KeyRegistry {
   private currentUserId: string | null = null;
@@ -18,7 +19,7 @@ export class KeyRegistry {
   resolve(keyDef: StorageKeyDef): string {
     switch (keyDef.scope) {
       case Scope.User:
-        if (!this.currentUserId) throw new Error("Keyward: userId not set.");
+        if (!this.currentUserId) throw new Error('Keyward: userId not set.');
         return `u/${this.currentUserId}/${keyDef.key}`;
       case Scope.Device:
         return `d/${keyDef.key}`;

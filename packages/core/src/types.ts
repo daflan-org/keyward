@@ -1,7 +1,7 @@
 export enum Scope {
-  User = "user",
-  Device = "device",
-  Global = "global",
+  User = 'user',
+  Device = 'device',
+  Global = 'global',
 }
 
 export interface StorageKeyDef {
