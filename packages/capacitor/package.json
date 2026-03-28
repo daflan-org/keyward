@@ -35,10 +35,11 @@
     "lint": "biome check src/",
     "lint:fix": "biome check --write src/",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist ios/Sources/Keyward",
+    "clean": "rm -rf dist ios/Sources/Keyward && find android/src/main/java/org/keyward -maxdepth 1 -name '*.java' -delete 2>/dev/null; true",
     "prepare:ios": "test -d ../platform-ios/Sources/Keyward && rm -rf ios/Sources/Keyward && cp -r ../platform-ios/Sources/Keyward ios/Sources/Keyward",
-    "prepack": "yarn prepare:ios",
-    "postpack": "rm -rf ios/Sources/Keyward"
+    "prepare:android": "test -d ../platform-android/src/main/java/org/keyward && cp ../platform-android/src/main/java/org/keyward/*.java android/src/main/java/org/keyward/",
+    "prepack": "yarn prepare:ios && yarn prepare:android",
+    "postpack": "rm -rf ios/Sources/Keyward && find android/src/main/java/org/keyward -maxdepth 1 -name '*.java' -delete 2>/dev/null; true"
   },
   "peerDependencies": {
     "@capacitor/core": "^8.0.0"
