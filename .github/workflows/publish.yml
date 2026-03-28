@@ -15,8 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    env:
-      YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -26,6 +25,7 @@ jobs:
         with:
           node-version: "22"
           cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
 
       - run: yarn install --immutable
 
@@ -44,14 +44,30 @@ jobs:
           done
           if [ "$FAILED" -eq 1 ]; then exit 1; fi
 
-      - name: Publish @daflan/keyward-core
-        run: yarn workspace @daflan/keyward-core npm publish --access public
+      - name: Pack and publish @daflan/keyward-core
+        run: |
+          yarn workspace @daflan/keyward-core pack --out %s.tgz
+          npm publish daflan-keyward-core.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish @daflan/keyward-platform-web
-        run: yarn workspace @daflan/keyward-platform-web npm publish --access public
+      - name: Pack and publish @daflan/keyward-platform-web
+        run: |
+          yarn workspace @daflan/keyward-platform-web pack --out %s.tgz
+          npm publish daflan-keyward-platform-web.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish @daflan/keyward-codegen
-        run: yarn workspace @daflan/keyward-codegen npm publish --access public
+      - name: Pack and publish @daflan/keyward-codegen
+        run: |
+          yarn workspace @daflan/keyward-codegen pack --out %s.tgz
+          npm publish daflan-keyward-codegen.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish @daflan/keyward-capacitor
-        run: yarn workspace @daflan/keyward-capacitor npm publish --access public
+      - name: Pack and publish @daflan/keyward-capacitor
+        run: |
+          yarn workspace @daflan/keyward-capacitor pack --out %s.tgz
+          npm publish daflan-keyward-capacitor.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
