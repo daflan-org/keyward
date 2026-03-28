@@ -1,5 +1,8 @@
 # Copied from platform-ios at pack time (see prepack script)
 ios/Sources/Keyward/
 
+# Copied from platform-android at pack time (see prepack script)
+android/src/main/java/org/keyward/*.java
+
 # SPM build cache
 ios/.build/
