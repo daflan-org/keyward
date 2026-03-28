@@ -1,6 +1,6 @@
 {
   "name": "@daflan/keyward-capacitor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Capacitor plugin bridge for Keyward secure storage",
   "license": "MIT",
   "repository": {
