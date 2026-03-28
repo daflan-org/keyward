@@ -1,5 +1,5 @@
-import type { KeywardBackend, StorageKeyDef } from '@keyward/core';
-import { KeyRegistry } from '@keyward/core';
+import { KeyRegistry } from './KeyRegistry.js';
+import type { KeywardBackend, StorageKeyDef } from './types.js';
 
 export class Keyward {
   private readonly registry: KeyRegistry;

@@ -43,7 +43,7 @@ npx keyward-codegen --config keyward.keys.json
 #### TypeScript
 
 ```typescript
-import { Scope, type StorageKeyDef } from '@keyward/platform-web';
+import { Scope, type StorageKeyDef } from '@keyward/core';
 
 export const KeywardKeys = {
   AUTH_TOKEN: { key: 'auth_token', scope: Scope.User } as const satisfies StorageKeyDef,
