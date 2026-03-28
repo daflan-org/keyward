@@ -1,6 +1,6 @@
 {
   "name": "@daflan/keyward-platform-web",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Web storage backend for Keyward (IndexedDB + WebCrypto)",
   "license": "MIT",
   "repository": {

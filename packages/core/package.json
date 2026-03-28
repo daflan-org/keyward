@@ -1,6 +1,6 @@
 {
   "name": "@daflan/keyward-core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Platform-agnostic types and key registry for Keyward",
   "license": "MIT",
   "repository": {
