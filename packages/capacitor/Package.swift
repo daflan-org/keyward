@@ -7,16 +7,17 @@ let package = Package(
     products: [
         .library(name: "KeywardCapacitorPlugin", targets: ["KeywardPlugin"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/daflan-org/keyward", from: "0.0.1"),
-    ],
     targets: [
+        .target(
+            name: "Keyward",
+            path: "ios/Sources/Keyward"
+        ),
         .target(
             name: "KeywardPlugin",
             dependencies: [
                 "Keyward",
             ],
-            path: "Sources/KeywardPlugin"
+            path: "ios/Sources/KeywardPlugin"
         ),
     ]
 )

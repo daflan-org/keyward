@@ -14,7 +14,7 @@ jobs:
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          if [[ "$PR_TITLE" =~ KW-[0-9]+ ]]; then
+          if [[ "$PR_TITLE" =~ KW-[0-9]+(\.[0-9]+)? ]]; then
             echo "PR title contains issue key: ${BASH_REMATCH[0]}"
           else
             echo "::error::PR title must contain a KW-N issue key (e.g. 'KW-14: add feature X')"
@@ -35,7 +35,7 @@ jobs:
             exit 0
           fi
 
-          pattern='^(feat|fix|chore|docs|refactor|test)/KW-[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$'
+          pattern='^(feat|fix|chore|docs|refactor|test)/KW-[0-9]+(\.[0-9]+)?-[a-z0-9]+(-[a-z0-9]+)*$'
 
           if [[ "$BRANCH" =~ $pattern ]]; then
             echo "Branch name is valid: $BRANCH"
@@ -47,6 +47,7 @@ jobs:
             echo "Valid prefixes: feat, fix, chore, docs, refactor, test"
             echo "Examples:"
             echo "  feat/KW-3-implement-platform-web"
+            echo "  feat/KW-11.1-capacitor-podspec"
             echo "  fix/KW-7-key-registry-null-user"
             echo "  chore/KW-14-issue-key-enforcement"
             exit 1

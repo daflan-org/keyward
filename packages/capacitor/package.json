@@ -21,8 +21,10 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "ios",
-    "android"
+    "ios/Sources/**",
+    "android",
+    "Package.swift",
+    "DaflanKeywardCapacitor.podspec"
   ],
   "publishConfig": {
     "access": "public"
@@ -33,7 +35,10 @@
     "lint": "biome check src/",
     "lint:fix": "biome check --write src/",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist ios/Sources/Keyward",
+    "prepare:ios": "test -d ../platform-ios/Sources/Keyward && rm -rf ios/Sources/Keyward && cp -r ../platform-ios/Sources/Keyward ios/Sources/Keyward",
+    "prepack": "yarn prepare:ios",
+    "postpack": "rm -rf ios/Sources/Keyward"
   },
   "peerDependencies": {
     "@capacitor/core": "^8.0.0"

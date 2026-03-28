@@ -72,8 +72,8 @@ await keyward.wipeUser(user._id);
 
 The Capacitor bridge delegates to native implementations:
 
-- **iOS:** Keychain via `platform-ios` (SPM dependency)
-- **Android:** EncryptedSharedPreferences via `platform-android` (Maven dependency)
+- **iOS:** Keychain via `platform-ios` (bundled native source)
+- **Android:** EncryptedSharedPreferences via `platform-android` (bundled native source)
 - **Web:** IndexedDB via `@daflan/keyward-platform-web` (npm dependency)
 
 Scope resolution happens in JavaScript. Native plugins receive already-resolved key strings.

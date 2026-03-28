@@ -1,6 +1,8 @@
 import Foundation
 import Capacitor
+#if canImport(Keyward)
 import Keyward
+#endif
 
 @objc(KeywardPlugin)
 public class KeywardPlugin: CAPPlugin, CAPBridgedPlugin {
