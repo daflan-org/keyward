@@ -6,13 +6,21 @@ plugins {
 group = 'org.keyward'
 version = '0.0.1'
 
+repositories {
+    mavenCentral()
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
-    implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 publishing {

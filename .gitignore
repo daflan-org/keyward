@@ -11,5 +11,7 @@ dist
 *.tsbuildinfo
 .build/
 .turbo/
+.gradle/
+build/
 local/
 .mcp.json
