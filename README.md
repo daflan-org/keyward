@@ -128,12 +128,12 @@ GitHub Flow. `main` is always stable. All work in short-lived branches (`feat/`,
 ## Roadmap
 
 - [x] Monorepo setup
-- [ ] `@daflan/keyward-core` implementation
-- [ ] `@daflan/keyward-platform-web` implementation
-- [ ] `platform-ios` implementation
-- [ ] `platform-android` implementation
-- [ ] `@daflan/keyward-codegen` CLI
-- [ ] `@daflan/keyward-capacitor` bridge
+- [x] `@daflan/keyward-core` implementation
+- [x] `@daflan/keyward-platform-web` implementation
+- [x] `platform-ios` implementation
+- [x] `platform-android` implementation
+- [x] `@daflan/keyward-codegen` CLI
+- [x] `@daflan/keyward-capacitor` bridge
 - [ ] First release (v0.1.0)
 
 ## Contributing
