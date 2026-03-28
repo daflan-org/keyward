@@ -1,4 +1,4 @@
-import { Scope } from '@keyward/core';
+import { Scope } from '@daflan/keyward-core';
 
 export function toCamelCase(screamingSnake: string): string {
   return screamingSnake

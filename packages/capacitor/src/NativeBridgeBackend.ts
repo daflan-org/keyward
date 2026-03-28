@@ -1,4 +1,4 @@
-import type { KeywardBackend } from '@keyward/core';
+import type { KeywardBackend } from '@daflan/keyward-core';
 import type { KeywardNativePlugin } from './definitions.js';
 
 export class NativeBridgeBackend implements KeywardBackend {

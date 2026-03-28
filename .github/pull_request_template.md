@@ -14,10 +14,10 @@
 
 <!-- Check all that apply. -->
 
-- [ ] `@keyward/core`
-- [ ] `@keyward/platform-web`
-- [ ] `@keyward/codegen`
-- [ ] `@keyward/capacitor`
+- [ ] `@daflan/keyward-core`
+- [ ] `@daflan/keyward-platform-web`
+- [ ] `@daflan/keyward-codegen`
+- [ ] `@daflan/keyward-capacitor`
 - [ ] `platform-ios`
 - [ ] `platform-android`
 

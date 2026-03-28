@@ -105,6 +105,58 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@daflan/keyward-capacitor@workspace:packages/capacitor":
+  version: 0.0.0-use.local
+  resolution: "@daflan/keyward-capacitor@workspace:packages/capacitor"
+  dependencies:
+    "@capacitor/core": "npm:^8.0.0"
+    "@daflan/keyward-core": "workspace:*"
+    "@daflan/keyward-platform-web": "workspace:*"
+    tsup: "npm:^8.5.0"
+    typescript: "npm:^6.0.0"
+    vitest: "npm:^4.1.0"
+  peerDependencies:
+    "@capacitor/core": ^8.0.0
+  languageName: unknown
+  linkType: soft
+
+"@daflan/keyward-codegen@workspace:packages/codegen":
+  version: 0.0.0-use.local
+  resolution: "@daflan/keyward-codegen@workspace:packages/codegen"
+  dependencies:
+    "@daflan/keyward-core": "workspace:*"
+    "@types/node": "npm:^25.5.0"
+    tsup: "npm:^8.5.0"
+    typescript: "npm:^6.0.0"
+    vitest: "npm:^4.1.0"
+  bin:
+    keyward-codegen: dist/cli.js
+  languageName: unknown
+  linkType: soft
+
+"@daflan/keyward-core@workspace:*, @daflan/keyward-core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "@daflan/keyward-core@workspace:packages/core"
+  dependencies:
+    tsup: "npm:^8.5.0"
+    typescript: "npm:^6.0.0"
+    vitest: "npm:^4.1.0"
+  languageName: unknown
+  linkType: soft
+
+"@daflan/keyward-platform-web@workspace:*, @daflan/keyward-platform-web@workspace:packages/platform-web":
+  version: 0.0.0-use.local
+  resolution: "@daflan/keyward-platform-web@workspace:packages/platform-web"
+  dependencies:
+    "@daflan/keyward-core": "workspace:*"
+    fake-indexeddb: "npm:^6.2.5"
+    idb: "npm:^8.0.0"
+    tsup: "npm:^8.5.0"
+    typescript: "npm:^6.0.0"
+    vitest: "npm:^4.1.0"
+  languageName: unknown
+  linkType: soft
+
 "@emnapi/core@npm:^1.7.1":
   version: 1.9.1
   resolution: "@emnapi/core@npm:1.9.1"
@@ -365,45 +417,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keyward/capacitor@workspace:packages/capacitor":
-  version: 0.0.0-use.local
-  resolution: "@keyward/capacitor@workspace:packages/capacitor"
-  dependencies:
-    "@capacitor/core": "npm:^8.0.0"
-    "@keyward/core": "workspace:*"
-    "@keyward/platform-web": "workspace:*"
-    tsup: "npm:^8.5.0"
-    typescript: "npm:^6.0.0"
-    vitest: "npm:^4.1.0"
-  peerDependencies:
-    "@capacitor/core": ^8.0.0
-  languageName: unknown
-  linkType: soft
-
-"@keyward/codegen@workspace:packages/codegen":
-  version: 0.0.0-use.local
-  resolution: "@keyward/codegen@workspace:packages/codegen"
-  dependencies:
-    "@keyward/core": "workspace:*"
-    "@types/node": "npm:^25.5.0"
-    tsup: "npm:^8.5.0"
-    typescript: "npm:^6.0.0"
-    vitest: "npm:^4.1.0"
-  bin:
-    keyward-codegen: dist/cli.js
-  languageName: unknown
-  linkType: soft
-
-"@keyward/core@workspace:*, @keyward/core@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "@keyward/core@workspace:packages/core"
-  dependencies:
-    tsup: "npm:^8.5.0"
-    typescript: "npm:^6.0.0"
-    vitest: "npm:^4.1.0"
-  languageName: unknown
-  linkType: soft
-
 "@keyward/platform-android@workspace:packages/platform-android":
   version: 0.0.0-use.local
   resolution: "@keyward/platform-android@workspace:packages/platform-android"
@@ -413,19 +426,6 @@ __metadata:
 "@keyward/platform-ios@workspace:packages/platform-ios":
   version: 0.0.0-use.local
   resolution: "@keyward/platform-ios@workspace:packages/platform-ios"
-  languageName: unknown
-  linkType: soft
-
-"@keyward/platform-web@workspace:*, @keyward/platform-web@workspace:packages/platform-web":
-  version: 0.0.0-use.local
-  resolution: "@keyward/platform-web@workspace:packages/platform-web"
-  dependencies:
-    "@keyward/core": "workspace:*"
-    fake-indexeddb: "npm:^6.2.5"
-    idb: "npm:^8.0.0"
-    tsup: "npm:^8.5.0"
-    typescript: "npm:^6.0.0"
-    vitest: "npm:^4.1.0"
   languageName: unknown
   linkType: soft
 

@@ -1,4 +1,4 @@
-import { Scope } from '@keyward/core';
+import { Scope } from '@daflan/keyward-core';
 import type { DynamicKey, ParsedConfig, StaticKey } from './types.js';
 
 export const STATIC_KEYS: readonly StaticKey[] = [

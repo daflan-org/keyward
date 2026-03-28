@@ -38,8 +38,8 @@ packages/
 | `yarn test` | all | Run all tests via Vitest |
 | `yarn lint` | all | Lint via Biome |
 | `yarn typecheck` | all | TypeScript type checking |
-| `yarn build --filter=@keyward/core` | single | Build one package |
-| `yarn test --filter=@keyward/codegen` | single | Test one package |
+| `yarn build --filter=@daflan/keyward-core` | single | Build one package |
+| `yarn test --filter=@daflan/keyward-codegen` | single | Test one package |
 
 Always run `yarn build` before `yarn test` (tests depend on built output from upstream packages).
 
@@ -49,7 +49,7 @@ Always run `yarn build` before `yarn test` (tests depend on built output from up
 
 - **Strict mode** with `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, and `verbatimModuleSyntax` enabled
 - Use `import type { ... }` for type-only imports (enforced by Biome `useImportType` rule)
-- `Scope` from `@keyward/core` is a value import (it is an enum), not a type import
+- `Scope` from `@daflan/keyward-core` is a value import (it is an enum), not a type import
 - Single quotes, trailing commas, semicolons, 2-space indent, 100-char line width
 - No `any` types (`noExplicitAny: error`)
 - No unused imports or variables (Biome errors, not warnings)

@@ -1,5 +1,5 @@
 {
-  "name": "@keyward/capacitor",
+  "name": "@daflan/keyward-capacitor",
   "version": "0.0.1",
   "description": "Capacitor plugin bridge for Keyward secure storage",
   "license": "MIT",
@@ -19,6 +19,9 @@
     "ios",
     "android"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
@@ -31,8 +34,8 @@
     "@capacitor/core": "^8.0.0"
   },
   "dependencies": {
-    "@keyward/core": "workspace:*",
-    "@keyward/platform-web": "workspace:*"
+    "@daflan/keyward-core": "workspace:*",
+    "@daflan/keyward-platform-web": "workspace:*"
   },
   "capacitor": {
     "ios": {

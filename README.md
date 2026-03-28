@@ -53,10 +53,10 @@ Keyward is **framework-agnostic**, **cross-platform**, and provides **user-scope
 
 | Package | Description | Registry |
 |---|---|---|
-| `@keyward/core` | Shared types, Scope enum, KeyRegistry | npm |
-| `@keyward/platform-web` | IndexedDB backend + Keyward class | npm |
-| `@keyward/codegen` | CLI to generate type-safe key accessors | npm |
-| `@keyward/capacitor` | Capacitor plugin bridge | npm |
+| `@daflan/keyward-core` | Shared types, Scope enum, KeyRegistry | npm |
+| `@daflan/keyward-platform-web` | IndexedDB backend + Keyward class | npm |
+| `@daflan/keyward-codegen` | CLI to generate type-safe key accessors | npm |
+| `@daflan/keyward-capacitor` | Capacitor plugin bridge | npm |
 | `platform-ios` | Swift Keychain implementation | SPM |
 | `platform-android` | Java Keystore implementation | Maven |
 
@@ -66,8 +66,8 @@ Pick the package for your platform:
 
 | Platform | Install | Guide |
 |---|---|---|
-| Capacitor (iOS + Android + Web) | `yarn add @keyward/capacitor` | [packages/capacitor](packages/capacitor/) |
-| Web only | `yarn add @keyward/platform-web` | [packages/platform-web](packages/platform-web/) |
+| Capacitor (iOS + Android + Web) | `yarn add @daflan/keyward-capacitor` | [packages/capacitor](packages/capacitor/) |
+| Web only | `yarn add @daflan/keyward-platform-web` | [packages/platform-web](packages/platform-web/) |
 | iOS native (Swift) | SPM: `github.com/daflan-org/keyward` | [packages/platform-ios](packages/platform-ios/) |
 | Android native (Java/Kotlin) | Maven: `org.keyward:platform-android` | [packages/platform-android](packages/platform-android/) |
 
@@ -87,7 +87,7 @@ Define your keys once in `keyward.keys.json`, generate type-safe accessors for e
 
 | Ecosystem | Install codegen | Output |
 |---|---|---|
-| Node (npm/yarn) | `npx @keyward/codegen --config keyward.keys.json` | TypeScript constants |
+| Node (npm/yarn) | `npx @daflan/keyward-codegen --config keyward.keys.json` | TypeScript constants |
 | iOS (Swift) | Run via npx or brew (planned) | Swift enum |
 | Android (Java/Kotlin) | Run via npx or Gradle task (planned) | Java class |
 | Flutter (Dart) | Run via npx or pub (planned) | Dart class |
@@ -128,12 +128,12 @@ GitHub Flow. `main` is always stable. All work in short-lived branches (`feat/`,
 ## Roadmap
 
 - [x] Monorepo setup
-- [ ] `@keyward/core` implementation
-- [ ] `@keyward/platform-web` implementation
+- [ ] `@daflan/keyward-core` implementation
+- [ ] `@daflan/keyward-platform-web` implementation
 - [ ] `platform-ios` implementation
 - [ ] `platform-android` implementation
-- [ ] `@keyward/codegen` CLI
-- [ ] `@keyward/capacitor` bridge
+- [ ] `@daflan/keyward-codegen` CLI
+- [ ] `@daflan/keyward-capacitor` bridge
 - [ ] First release (v0.1.0)
 
 ## Contributing

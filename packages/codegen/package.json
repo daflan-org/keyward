@@ -1,12 +1,10 @@
 {
-  "name": "@keyward/codegen",
+  "name": "@daflan/keyward-codegen",
   "version": "0.0.1",
   "description": "CLI to generate type-safe storage key accessors from keyward.keys.json",
   "license": "MIT",
   "type": "module",
-  "bin": {
-    "keyward-codegen": "dist/cli.js"
-  },
+  "bin": "dist/cli.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -20,6 +18,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest run --passWithNoTests",
@@ -29,7 +30,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@keyward/core": "workspace:*"
+    "@daflan/keyward-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",

@@ -1,17 +1,17 @@
-# @keyward/platform-web
+# @daflan/keyward-platform-web
 
 Web storage backend for [Keyward](https://github.com/daflan-org/keyward). Uses IndexedDB for persistent key-value storage with user-scoped key isolation.
 
 ## Install
 
 ```bash
-yarn add @keyward/platform-web
+yarn add @daflan/keyward-platform-web
 ```
 
 ## Usage
 
 ```typescript
-import { Keyward, IndexedDBBackend } from '@keyward/platform-web';
+import { Keyward, IndexedDBBackend } from '@daflan/keyward-platform-web';
 
 const keyward = new Keyward(new IndexedDBBackend());
 
@@ -29,12 +29,12 @@ await keyward.wipeUser('user_507f1f');
 ### With Codegen (recommended)
 
 ```bash
-yarn add -D @keyward/codegen
+yarn add -D @daflan/keyward-codegen
 npx keyward-codegen --config keyward.keys.json
 ```
 
 ```typescript
-import { Keyward, IndexedDBBackend } from '@keyward/platform-web';
+import { Keyward, IndexedDBBackend } from '@daflan/keyward-platform-web';
 import { KeywardKeys } from './generated/KeywardKeys';
 
 const keyward = new Keyward(new IndexedDBBackend());
@@ -48,7 +48,7 @@ await keyward.set(KeywardKeys.AUTH_TOKEN, token);
 Implement the `KeywardBackend` interface to use a different storage engine:
 
 ```typescript
-import { Keyward, type KeywardBackend } from '@keyward/platform-web';
+import { Keyward, type KeywardBackend } from '@daflan/keyward-platform-web';
 
 const memoryBackend: KeywardBackend = {
   store: new Map<string, string>(),
