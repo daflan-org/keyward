@@ -21,6 +21,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "test": "vitest run",
     "lint": "biome check src/",
     "lint:fix": "biome check --write src/",
     "typecheck": "tsc --noEmit",
@@ -33,9 +34,18 @@
     "@keyward/core": "workspace:*",
     "@keyward/platform-web": "workspace:*"
   },
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
   "devDependencies": {
     "@capacitor/core": "^8.0.0",
     "tsup": "^8.5.0",
-    "typescript": "^6.0.0"
+    "typescript": "^6.0.0",
+    "vitest": "^4.1.0"
   }
 }

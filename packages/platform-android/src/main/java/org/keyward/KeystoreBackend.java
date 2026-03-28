@@ -2,7 +2,7 @@ package org.keyward;
 
 import java.util.List;
 
-interface KeystoreBackend {
+public interface KeystoreBackend {
     void set(String key, String value) throws KeywardException;
     String get(String key);
     void remove(String key);

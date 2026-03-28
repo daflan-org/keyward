@@ -1,23 +1,24 @@
-import type { KeywardBackend, StorageKeyDef } from '@keyward/core';
-import { Scope } from '@keyward/core';
-import { Keyward } from './Keyward.js';
+import type { StorageKeyDef } from '@keyward/core';
+import { Keyward, Scope } from '@keyward/core';
+import type { KeywardNativePlugin } from './definitions.js';
+import { NativeBridgeBackend } from './NativeBridgeBackend.js';
 
 const keyDef = (key: string, scope: Scope): StorageKeyDef => ({ key, scope });
 
-function createMemoryBackend(): KeywardBackend {
+function createMockPlugin(): KeywardNativePlugin {
   const store = new Map<string, string>();
   return {
-    async get(key) {
-      return store.get(key) ?? null;
+    async get({ key }) {
+      return { value: store.get(key) ?? null };
     },
-    async set(key, value) {
+    async set({ key, value }) {
       store.set(key, value);
     },
-    async remove(key) {
+    async remove({ key }) {
       store.delete(key);
     },
     async keys() {
-      return [...store.keys()];
+      return { keys: [...store.keys()] };
     },
     async clear() {
       store.clear();
@@ -25,11 +26,11 @@ function createMemoryBackend(): KeywardBackend {
   };
 }
 
-describe('Keyward', () => {
+describe('Keyward with NativeBridgeBackend', () => {
   let kw: Keyward;
 
   beforeEach(() => {
-    kw = new Keyward(createMemoryBackend());
+    kw = new Keyward(new NativeBridgeBackend(createMockPlugin()));
   });
 
   describe('userId management', () => {

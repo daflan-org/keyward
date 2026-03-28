@@ -6,6 +6,10 @@ import java.util.List;
 public final class Keyward {
     static KeystoreBackend backend;
 
+    public static void setBackend(KeystoreBackend b) {
+        backend = b;
+    }
+
     // High-level API (native Android consumers)
 
     public static String get(KeyDef keyDef, KeyRegistry registry) throws KeywardException {
