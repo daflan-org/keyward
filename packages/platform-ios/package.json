@@ -1,0 +1,8 @@
+{
+  "name": "@keyward/platform-ios",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "swift test"
+  }
+}

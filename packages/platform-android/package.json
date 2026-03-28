@@ -1,0 +1,8 @@
+{
+  "name": "@keyward/platform-android",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "./gradlew test"
+  }
+}

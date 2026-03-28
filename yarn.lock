@@ -403,6 +403,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@keyward/platform-android@workspace:packages/platform-android":
+  version: 0.0.0-use.local
+  resolution: "@keyward/platform-android@workspace:packages/platform-android"
+  languageName: unknown
+  linkType: soft
+
+"@keyward/platform-ios@workspace:packages/platform-ios":
+  version: 0.0.0-use.local
+  resolution: "@keyward/platform-ios@workspace:packages/platform-ios"
+  languageName: unknown
+  linkType: soft
+
 "@keyward/platform-web@workspace:*, @keyward/platform-web@workspace:packages/platform-web":
   version: 0.0.0-use.local
   resolution: "@keyward/platform-web@workspace:packages/platform-web"
