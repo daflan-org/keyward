@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "Platform-agnostic types and key registry for Keyward",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daflan-org/keyward.git",
+    "directory": "packages/core"
+  },
   "type": "module",
   "exports": {
     ".": {

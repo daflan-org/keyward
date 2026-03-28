@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "CLI to generate type-safe storage key accessors from keyward.keys.json",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daflan-org/keyward.git",
+    "directory": "packages/codegen"
+  },
   "type": "module",
   "bin": "dist/cli.js",
   "exports": {
