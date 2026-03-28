@@ -45,29 +45,33 @@ jobs:
           if [ "$FAILED" -eq 1 ]; then exit 1; fi
 
       - name: Pack and publish @daflan/keyward-core
+        working-directory: packages/core
         run: |
-          yarn workspace @daflan/keyward-core pack --out %s.tgz
-          npm publish daflan-keyward-core.tgz --provenance --access public
+          yarn pack --out package.tgz
+          npm publish package.tgz --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Pack and publish @daflan/keyward-platform-web
+        working-directory: packages/platform-web
         run: |
-          yarn workspace @daflan/keyward-platform-web pack --out %s.tgz
-          npm publish daflan-keyward-platform-web.tgz --provenance --access public
+          yarn pack --out package.tgz
+          npm publish package.tgz --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Pack and publish @daflan/keyward-codegen
+        working-directory: packages/codegen
         run: |
-          yarn workspace @daflan/keyward-codegen pack --out %s.tgz
-          npm publish daflan-keyward-codegen.tgz --provenance --access public
+          yarn pack --out package.tgz
+          npm publish package.tgz --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Pack and publish @daflan/keyward-capacitor
+        working-directory: packages/capacitor
         run: |
-          yarn workspace @daflan/keyward-capacitor pack --out %s.tgz
-          npm publish daflan-keyward-capacitor.tgz --provenance --access public
+          yarn pack --out package.tgz
+          npm publish package.tgz --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
