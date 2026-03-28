@@ -1,0 +1,5 @@
+# Copied from platform-ios at pack time (see prepack script)
+ios/Sources/Keyward/
+
+# SPM build cache
+ios/.build/

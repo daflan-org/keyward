@@ -57,8 +57,8 @@ Keyward is **framework-agnostic**, **cross-platform**, and provides **user-scope
 | `@daflan/keyward-platform-web` | IndexedDB backend + Keyward class | npm |
 | `@daflan/keyward-codegen` | CLI to generate type-safe key accessors | npm |
 | `@daflan/keyward-capacitor` | Capacitor plugin bridge | npm |
-| `platform-ios` | Swift Keychain implementation | SPM |
-| `platform-android` | Java Keystore implementation | Maven |
+| `platform-ios` | Swift Keychain implementation | SPM (planned) |
+| `platform-android` | Java Keystore implementation | Maven (planned) |
 
 ## Getting Started
 
@@ -68,8 +68,8 @@ Pick the package for your platform:
 |---|---|---|
 | Capacitor (iOS + Android + Web) | `yarn add @daflan/keyward-capacitor` | [packages/capacitor](packages/capacitor/) |
 | Web only | `yarn add @daflan/keyward-platform-web` | [packages/platform-web](packages/platform-web/) |
-| iOS native (Swift) | SPM: `github.com/daflan-org/keyward` | [packages/platform-ios](packages/platform-ios/) |
-| Android native (Java/Kotlin) | Maven: `org.keyward:platform-android` | [packages/platform-android](packages/platform-android/) |
+| iOS native (Swift) | SPM (planned, see [#21](https://github.com/daflan-org/keyward/issues/21)) | [packages/platform-ios](packages/platform-ios/) |
+| Android native (Java/Kotlin) | Maven (planned, see [#21](https://github.com/daflan-org/keyward/issues/21)) | [packages/platform-android](packages/platform-android/) |
 
 All platforms share the same concepts:
 
