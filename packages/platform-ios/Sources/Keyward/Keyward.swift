@@ -1,7 +1,36 @@
 public final class Keyward {
     static var backend: KeychainBackend = SystemKeychainBackend()
+    private static let registry = KeyRegistry()
 
-    // MARK: - High-level API (native iOS consumers)
+    // MARK: - User ID management (uses internal registry)
+
+    public static func setUserId(_ userId: String) {
+        registry.setUserId(userId)
+    }
+
+    public static func clearUserId() {
+        registry.clearUserId()
+    }
+
+    public static func getUserId() -> String? {
+        registry.getUserId()
+    }
+
+    // MARK: - High-level API with internal registry
+
+    public static func get(_ keyDef: KeyDef) throws -> String? {
+        try get(keyDef, registry: registry)
+    }
+
+    public static func set(_ keyDef: KeyDef, value: String) throws {
+        try set(keyDef, value: value, registry: registry)
+    }
+
+    public static func remove(_ keyDef: KeyDef) throws {
+        try remove(keyDef, registry: registry)
+    }
+
+    // MARK: - High-level API with explicit registry
 
     public static func get(_ keyDef: KeyDef, registry: KeyRegistry) throws -> String? {
         let resolvedKey = try registry.resolve(keyDef)

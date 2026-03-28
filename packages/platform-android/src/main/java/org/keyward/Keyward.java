@@ -5,12 +5,41 @@ import java.util.List;
 
 public final class Keyward {
     static KeystoreBackend backend;
+    private static final KeyRegistry registry = new KeyRegistry();
 
     public static void setBackend(KeystoreBackend b) {
         backend = b;
     }
 
-    // High-level API (native Android consumers)
+    // User ID management (uses internal registry)
+
+    public static void setUserId(String userId) {
+        registry.setUserId(userId);
+    }
+
+    public static void clearUserId() {
+        registry.clearUserId();
+    }
+
+    public static String getUserId() {
+        return registry.getUserId();
+    }
+
+    // High-level API with internal registry
+
+    public static String get(KeyDef keyDef) throws KeywardException {
+        return get(keyDef, registry);
+    }
+
+    public static void set(KeyDef keyDef, String value) throws KeywardException {
+        set(keyDef, value, registry);
+    }
+
+    public static void remove(KeyDef keyDef) throws KeywardException {
+        remove(keyDef, registry);
+    }
+
+    // High-level API with explicit registry
 
     public static String get(KeyDef keyDef, KeyRegistry registry) throws KeywardException {
         String resolvedKey = registry.resolve(keyDef);
