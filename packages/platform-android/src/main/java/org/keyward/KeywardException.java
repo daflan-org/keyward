@@ -16,4 +16,8 @@ public final class KeywardException extends Exception {
     public static KeywardException storageWrite(Throwable cause) {
         return new KeywardException("Keyward: storage write failed.", cause);
     }
+
+    public static KeywardException storageFailed(String key) {
+        return new KeywardException("Keyward: storage operation failed for key: " + key);
+    }
 }
