@@ -1,6 +1,6 @@
 {
   "name": "@daflan/keyward-codegen",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "CLI to generate type-safe storage key accessors from keyward.keys.json",
   "license": "MIT",
   "repository": {
