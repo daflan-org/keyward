@@ -1,7 +1,7 @@
 package org.keyward;
 
 public final class KeyRegistry {
-    private String currentUserId;
+    private volatile String currentUserId;
 
     public KeyRegistry() {}
 
@@ -23,7 +23,7 @@ public final class KeyRegistry {
                 if (currentUserId == null) {
                     throw KeywardException.userIdNotSet();
                 }
-                return "u/" + currentUserId + "/" + keyDef.getKey();
+                return getUserPrefix(currentUserId) + keyDef.getKey();
             case DEVICE:
                 return "d/" + keyDef.getKey();
             case GLOBAL:
@@ -36,4 +36,5 @@ public final class KeyRegistry {
     public static String getUserPrefix(String userId) {
         return "u/" + userId + "/";
     }
+
 }

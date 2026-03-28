@@ -1,5 +1,6 @@
 package org.keyward;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Keyward {
@@ -28,7 +29,7 @@ public final class Keyward {
 
     public static void wipeUser(String userId) {
         String prefix = KeyRegistry.getUserPrefix(userId);
-        for (String key : keys()) {
+        for (String key : new ArrayList<>(keys())) {
             if (key.startsWith(prefix)) {
                 removeRaw(key);
             }
