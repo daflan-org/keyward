@@ -1,5 +1,5 @@
 {
-  "name": "@keyward/core",
+  "name": "@daflan/keyward-core",
   "version": "0.0.1",
   "description": "Platform-agnostic types and key registry for Keyward",
   "license": "MIT",
@@ -17,6 +17,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest run --passWithNoTests",

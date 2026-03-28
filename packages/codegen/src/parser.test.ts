@@ -1,4 +1,4 @@
-import { Scope } from '@keyward/core';
+import { Scope } from '@daflan/keyward-core';
 import { parseConfigFromJson } from './parser.js';
 
 const minimalConfig = {

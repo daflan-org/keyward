@@ -1,11 +1,11 @@
-# @keyward/capacitor
+# @daflan/keyward-capacitor
 
 Capacitor plugin bridge for [Keyward](https://github.com/daflan-org/keyward) secure storage. Uses native Keychain (iOS), Keystore (Android), and IndexedDB (Web) under the hood.
 
 ## Install
 
 ```bash
-yarn add @keyward/capacitor
+yarn add @daflan/keyward-capacitor
 npx cap sync
 ```
 
@@ -34,14 +34,14 @@ Create `keyward.keys.json` in your project root:
 ### 2. Generate
 
 ```bash
-yarn add -D @keyward/codegen
+yarn add -D @daflan/keyward-codegen
 npx keyward-codegen --config keyward.keys.json
 ```
 
 ### 3. Use
 
 ```typescript
-import { createKeyward } from '@keyward/capacitor';
+import { createKeyward } from '@daflan/keyward-capacitor';
 import { KeywardKeys } from './generated/KeywardKeys';
 
 const keyward = createKeyward(Capacitor.getPlatform());
@@ -74,7 +74,7 @@ The Capacitor bridge delegates to native implementations:
 
 - **iOS:** Keychain via `platform-ios` (SPM dependency)
 - **Android:** EncryptedSharedPreferences via `platform-android` (Maven dependency)
-- **Web:** IndexedDB via `@keyward/platform-web` (npm dependency)
+- **Web:** IndexedDB via `@daflan/keyward-platform-web` (npm dependency)
 
 Scope resolution happens in JavaScript. Native plugins receive already-resolved key strings.
 

@@ -1,14 +1,14 @@
-# @keyward/core
+# @daflan/keyward-core
 
 Platform-agnostic types and key registry for [Keyward](https://github.com/daflan-org/keyward). This package contains the shared foundation used by all platform implementations.
 
 ## Install
 
 ```bash
-yarn add @keyward/core
+yarn add @daflan/keyward-core
 ```
 
-Most users should install a platform package (`@keyward/platform-web`, `@keyward/capacitor`) instead. This package is for building custom integrations or platform backends.
+Most users should install a platform package (`@daflan/keyward-platform-web`, `@daflan/keyward-capacitor`) instead. This package is for building custom integrations or platform backends.
 
 ## What's Inside
 
@@ -20,8 +20,8 @@ Most users should install a platform package (`@keyward/platform-web`, `@keyward
 ## Usage
 
 ```typescript
-import { Scope, KeyRegistry } from '@keyward/core';
-import type { StorageKeyDef } from '@keyward/core';
+import { Scope, KeyRegistry } from '@daflan/keyward-core';
+import type { StorageKeyDef } from '@daflan/keyward-core';
 
 const registry = new KeyRegistry();
 registry.setUserId('user_507f1f');

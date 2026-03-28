@@ -1,5 +1,5 @@
-import type { StorageKeyDef } from '@keyward/core';
-import { Keyward, Scope } from '@keyward/core';
+import type { StorageKeyDef } from '@daflan/keyward-core';
+import { Keyward, Scope } from '@daflan/keyward-core';
 import type { KeywardNativePlugin } from './definitions.js';
 import { NativeBridgeBackend } from './NativeBridgeBackend.js';
 

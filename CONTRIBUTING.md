@@ -37,7 +37,7 @@ yarn test
 
 Use the [Bug Report](https://github.com/daflan-org/keyward/issues/new?template=bug_report.yml) issue template. Include:
 
-- Which package is affected (`@keyward/core`, `@keyward/platform-web`, etc.)
+- Which package is affected (`@daflan/keyward-core`, `@daflan/keyward-platform-web`, etc.)
 - Steps to reproduce
 - Expected vs actual behavior
 - Platform and version info

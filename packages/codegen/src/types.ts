@@ -1,4 +1,4 @@
-import type { Scope } from '@keyward/core';
+import type { Scope } from '@daflan/keyward-core';
 
 export interface ParsedParam {
   readonly name: string;

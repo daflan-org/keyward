@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { Scope } from '@keyward/core';
+import { Scope } from '@daflan/keyward-core';
 import type { DynamicKey, ParsedConfig, ParsedParam, StaticKey } from './types.js';
 
 export const PARAM_REGEX = /\{([a-zA-Z][a-zA-Z0-9]*)\}/g;

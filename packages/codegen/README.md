@@ -1,11 +1,11 @@
-# @keyward/codegen
+# @daflan/keyward-codegen
 
 CLI tool that generates type-safe storage key accessors from a single `keyward.keys.json` config file. Outputs for TypeScript, Swift, and Java from one source of truth.
 
 ## Install
 
 ```bash
-yarn add -D @keyward/codegen
+yarn add -D @daflan/keyward-codegen
 ```
 
 ## Usage
@@ -43,7 +43,7 @@ npx keyward-codegen --config keyward.keys.json
 #### TypeScript
 
 ```typescript
-import { Scope, type StorageKeyDef } from '@keyward/core';
+import { Scope, type StorageKeyDef } from '@daflan/keyward-core';
 
 export const KeywardKeys = {
   AUTH_TOKEN: { key: 'auth_token', scope: Scope.User } as const satisfies StorageKeyDef,

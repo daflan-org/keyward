@@ -1,0 +1,57 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build, Test & Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "yarn"
+
+      - run: yarn install --immutable
+
+      - run: yarn turbo run build test --filter='@daflan/*'
+
+      - name: Validate tag matches package versions
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/v}"
+          FAILED=0
+          for PKG in core platform-web codegen capacitor; do
+            PKG_VERSION=$(node -p "require('./packages/${PKG}/package.json').version")
+            if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+              echo "::error::packages/${PKG} version ($PKG_VERSION) != tag ($TAG_VERSION)"
+              FAILED=1
+            fi
+          done
+          if [ "$FAILED" -eq 1 ]; then exit 1; fi
+
+      - name: Publish @daflan/keyward-core
+        run: yarn workspace @daflan/keyward-core npm publish --access public
+
+      - name: Publish @daflan/keyward-platform-web
+        run: yarn workspace @daflan/keyward-platform-web npm publish --access public
+
+      - name: Publish @daflan/keyward-codegen
+        run: yarn workspace @daflan/keyward-codegen npm publish --access public
+
+      - name: Publish @daflan/keyward-capacitor
+        run: yarn workspace @daflan/keyward-capacitor npm publish --access public

@@ -1,4 +1,4 @@
-import type { KeywardBackend } from '@keyward/core';
+import type { KeywardBackend } from '@daflan/keyward-core';
 import { openDB } from 'idb';
 
 const DB_NAME = 'keyward';

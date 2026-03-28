@@ -1,10 +1,10 @@
-import { Keyward } from '@keyward/core';
-import { IndexedDBBackend } from '@keyward/platform-web';
+import { Keyward } from '@daflan/keyward-core';
+import { IndexedDBBackend } from '@daflan/keyward-platform-web';
 import { NativeBridgeBackend } from './NativeBridgeBackend.js';
 import { NativePlugin } from './plugin.js';
 
-export type { KeywardBackend, StorageKeyDef } from '@keyward/core';
-export { Keyward, Scope } from '@keyward/core';
+export type { KeywardBackend, StorageKeyDef } from '@daflan/keyward-core';
+export { Keyward, Scope } from '@daflan/keyward-core';
 export type { KeywardNativePlugin } from './definitions.js';
 export { NativeBridgeBackend } from './NativeBridgeBackend.js';
 

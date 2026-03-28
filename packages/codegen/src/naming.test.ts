@@ -1,4 +1,4 @@
-import { Scope } from '@keyward/core';
+import { Scope } from '@daflan/keyward-core';
 import { toCamelCase, toJavaScope, toSwiftScope, toTsScope } from './naming.js';
 
 describe('toCamelCase', () => {
