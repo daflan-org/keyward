@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.9/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -50,7 +50,12 @@
     }
   },
   "files": {
-    "includes": ["packages/*/src/**"],
-    "experimentalScannerIgnores": ["dist", "node_modules", ".turbo", ".build"]
+    "includes": [
+      "packages/*/src/**",
+      "!!**/dist",
+      "!!**/node_modules",
+      "!!**/.turbo",
+      "!!**/.build"
+    ]
   }
 }
