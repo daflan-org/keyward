@@ -1,0 +1,41 @@
+{
+  "name": "@daflan/keyward-recovery-core",
+  "version": "0.0.9",
+  "description": "Recoverable secrets for Keyward: multi-recipient envelope + passkey-PRF recovery (platform-agnostic core)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daflan-org/keyward.git",
+    "directory": "packages/recovery-core"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "lint": "biome check src/",
+    "lint:fix": "biome check --write src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
+  }
+}

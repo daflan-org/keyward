@@ -1,0 +1,8 @@
+{
+  "name": "@keyward/platform-android-recovery",
+  "version": "0.0.9",
+  "private": true,
+  "scripts": {
+    "test": "./gradlew test"
+  }
+}

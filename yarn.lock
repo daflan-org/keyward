@@ -157,6 +157,30 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@daflan/keyward-recovery-core@workspace:*, @daflan/keyward-recovery-core@workspace:packages/recovery-core":
+  version: 0.0.0-use.local
+  resolution: "@daflan/keyward-recovery-core@workspace:packages/recovery-core"
+  dependencies:
+    tsup: "npm:^8.5.1"
+    typescript: "npm:^6.0.2"
+    vitest: "npm:^4.1.4"
+  languageName: unknown
+  linkType: soft
+
+"@daflan/keyward-recovery@workspace:packages/recovery-capacitor":
+  version: 0.0.0-use.local
+  resolution: "@daflan/keyward-recovery@workspace:packages/recovery-capacitor"
+  dependencies:
+    "@capacitor/core": "npm:^8.3.0"
+    "@daflan/keyward-recovery-core": "workspace:*"
+    tsup: "npm:^8.5.1"
+    typescript: "npm:^6.0.2"
+    vitest: "npm:^4.1.4"
+  peerDependencies:
+    "@capacitor/core": ^8.0.0
+  languageName: unknown
+  linkType: soft
+
 "@emnapi/core@npm:1.9.2":
   version: 1.9.2
   resolution: "@emnapi/core@npm:1.9.2"
@@ -417,9 +441,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@keyward/platform-android-recovery@workspace:packages/platform-android-recovery":
+  version: 0.0.0-use.local
+  resolution: "@keyward/platform-android-recovery@workspace:packages/platform-android-recovery"
+  languageName: unknown
+  linkType: soft
+
 "@keyward/platform-android@workspace:packages/platform-android":
   version: 0.0.0-use.local
   resolution: "@keyward/platform-android@workspace:packages/platform-android"
+  languageName: unknown
+  linkType: soft
+
+"@keyward/platform-ios-recovery@workspace:packages/platform-ios-recovery":
+  version: 0.0.0-use.local
+  resolution: "@keyward/platform-ios-recovery@workspace:packages/platform-ios-recovery"
   languageName: unknown
   linkType: soft
 
