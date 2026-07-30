@@ -54,7 +54,9 @@ public class KeywardRecoveryPlugin extends Plugin {
 
                     @Override
                     public void onError(Throwable error) {
-                        call.reject("prfRegister failed", error);
+                        call.reject(
+                                "prfRegister failed",
+                                error instanceof Exception ? (Exception) error : new Exception(error));
                     }
                 });
     }
@@ -81,7 +83,9 @@ public class KeywardRecoveryPlugin extends Plugin {
 
                     @Override
                     public void onError(Throwable error) {
-                        call.reject("prfAssert failed", error);
+                        call.reject(
+                                "prfAssert failed",
+                                error instanceof Exception ? (Exception) error : new Exception(error));
                     }
                 });
     }
