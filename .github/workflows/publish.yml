@@ -35,7 +35,7 @@ jobs:
         run: |
           TAG_VERSION="${GITHUB_REF#refs/tags/v}"
           FAILED=0
-          for PKG in core platform-web codegen capacitor; do
+          for PKG in core platform-web codegen capacitor recovery-core recovery-capacitor; do
             PKG_VERSION=$(node -p "require('./packages/${PKG}/package.json').version")
             if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
               echo "::error::packages/${PKG} version ($PKG_VERSION) != tag ($TAG_VERSION)"
@@ -70,6 +70,25 @@ jobs:
 
       - name: Pack and publish @daflan/keyward-capacitor
         working-directory: packages/capacitor
+        run: |
+          yarn pack --out package.tgz
+          npm publish package.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Recovery packages. recovery-core must publish before recovery-capacitor,
+      # which declares it as a dependency (workspace:* is resolved to the concrete
+      # version at pack time).
+      - name: Pack and publish @daflan/keyward-recovery-core
+        working-directory: packages/recovery-core
+        run: |
+          yarn pack --out package.tgz
+          npm publish package.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Pack and publish @daflan/keyward-recovery
+        working-directory: packages/recovery-capacitor
         run: |
           yarn pack --out package.tgz
           npm publish package.tgz --provenance --access public
