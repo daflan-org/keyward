@@ -1,6 +1,6 @@
 {
   "name": "@daflan/keyward-recovery",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Capacitor bridge for Keyward recoverable secrets (passkey-PRF native + recovery-core)",
   "license": "MIT",
   "repository": {
