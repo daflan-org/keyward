@@ -1,0 +1,8 @@
+{
+  "name": "@keyward/platform-ios-recovery",
+  "version": "0.0.9",
+  "private": true,
+  "scripts": {
+    "test": "swift test"
+  }
+}

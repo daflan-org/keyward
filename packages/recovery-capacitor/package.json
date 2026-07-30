@@ -1,0 +1,64 @@
+{
+  "name": "@daflan/keyward-recovery",
+  "version": "0.0.9",
+  "description": "Capacitor bridge for Keyward recoverable secrets (passkey-PRF native + recovery-core)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daflan-org/keyward.git",
+    "directory": "packages/recovery-capacitor"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "ios/Sources/**",
+    "android",
+    "Package.swift",
+    "DaflanKeywardRecoveryCapacitor.podspec"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "lint": "biome check src/",
+    "lint:fix": "biome check --write src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist ios/Sources/KeywardRecovery && find android/src/main/java/org/keyward/recovery -maxdepth 1 -name '*.java' -delete 2>/dev/null; true",
+    "prepare:ios": "test -d ../platform-ios-recovery/Sources/KeywardRecovery && rm -rf ios/Sources/KeywardRecovery && cp -r ../platform-ios-recovery/Sources/KeywardRecovery ios/Sources/KeywardRecovery",
+    "prepare:android": "test -d ../platform-android-recovery/src/main/java/org/keyward/recovery && cp ../platform-android-recovery/src/main/java/org/keyward/recovery/*.java android/src/main/java/org/keyward/recovery/",
+    "prepack": "yarn prepare:ios && yarn prepare:android",
+    "postpack": "rm -rf ios/Sources/KeywardRecovery && find android/src/main/java/org/keyward/recovery -maxdepth 1 -name '*.java' -delete 2>/dev/null; true"
+  },
+  "peerDependencies": {
+    "@capacitor/core": "^8.0.0"
+  },
+  "dependencies": {
+    "@daflan/keyward-recovery-core": "workspace:*"
+  },
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "devDependencies": {
+    "@capacitor/core": "^8.3.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
+  }
+}
