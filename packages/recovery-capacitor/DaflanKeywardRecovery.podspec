@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name = 'DaflanKeywardRecoveryCapacitor'
+  s.name = 'DaflanKeywardRecovery'
   s.module_name = 'KeywardRecovery'
   s.version = package['version']
   s.summary = package['description']
