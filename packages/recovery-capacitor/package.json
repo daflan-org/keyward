@@ -24,7 +24,7 @@
     "ios/Sources/**",
     "android",
     "Package.swift",
-    "DaflanKeywardRecoveryCapacitor.podspec"
+    "DaflanKeywardRecovery.podspec"
   ],
   "publishConfig": {
     "access": "public"
