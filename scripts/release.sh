@@ -49,8 +49,9 @@ echo ""
 echo "Bumping all packages: v${CURRENT} -> v${VERSION}"
 echo ""
 
-# npm packages
-for PKG in core platform-web codegen capacitor platform-ios platform-android; do
+# npm packages (storage + recovery)
+for PKG in core platform-web codegen capacitor platform-ios platform-android \
+           recovery-core recovery-capacitor platform-ios-recovery platform-android-recovery; do
   PKG_JSON="${ROOT}/packages/${PKG}/package.json"
   if [[ -f "$PKG_JSON" ]]; then
     sed -i '' "s/\"version\": \"[^\"]*\"/\"version\": \"${VERSION}\"/" "$PKG_JSON"
@@ -58,12 +59,14 @@ for PKG in core platform-web codegen capacitor platform-ios platform-android; do
   fi
 done
 
-# Android build.gradle
-GRADLE="${ROOT}/packages/platform-android/build.gradle"
-if [[ -f "$GRADLE" ]]; then
-  sed -i '' "s/version = '[^']*'/version = '${VERSION}'/" "$GRADLE"
-  echo "  packages/platform-android/build.gradle -> ${VERSION}"
-fi
+# Android build.gradle (storage + recovery native libs)
+for GRADLE_PKG in platform-android platform-android-recovery; do
+  GRADLE="${ROOT}/packages/${GRADLE_PKG}/build.gradle"
+  if [[ -f "$GRADLE" ]]; then
+    sed -i '' "s/version = '[^']*'/version = '${VERSION}'/" "$GRADLE"
+    echo "  packages/${GRADLE_PKG}/build.gradle -> ${VERSION}"
+  fi
+done
 
 # Capacitor Android build.gradle (has its own version via plugin)
 CAP_GRADLE="${ROOT}/packages/capacitor/android/build.gradle"
