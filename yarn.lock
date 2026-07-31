@@ -161,6 +161,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@daflan/keyward-recovery-core@workspace:packages/recovery-core"
   dependencies:
+    hash-wasm: "npm:^4.12.0"
     tsup: "npm:^8.5.1"
     typescript: "npm:^6.0.2"
     vitest: "npm:^4.1.4"
@@ -1335,6 +1336,13 @@ __metadata:
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: 10c0/386d011a553e02bc594ac2ca0bd6d9e4c22d7fa8cfbfc448a6d148c59ea881b092db9dbe3547ae4b88e55f1b01f7c4a2ecc53b310c042793e63aa44cf6c257f2
+  languageName: node
+  linkType: hard
+
+"hash-wasm@npm:^4.12.0":
+  version: 4.12.0
+  resolution: "hash-wasm@npm:4.12.0"
+  checksum: 10c0/6cb95055319810b6f673de755289960683a9831807690795f0e8918b2fd7e6ae5b82a9dc47cbace171cf2814b412ef68c315a0ead0b4d96bd3e56a05e4bde136
   languageName: node
   linkType: hard
 

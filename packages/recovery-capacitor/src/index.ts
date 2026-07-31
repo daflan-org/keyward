@@ -4,14 +4,21 @@ import { NativePrfBridge } from './NativePrfBridge.js';
 import { NativePlugin } from './plugin.js';
 
 export type {
+  Argon2idParams,
   Availability,
+  CodeRecipient,
   Envelope,
   EnvelopeTransport,
   NativePrf,
   Recipient,
   RecipientSpec,
 } from '@daflan/keyward-recovery-core';
-export { KeywardRecoveryError, Recoverable } from '@daflan/keyward-recovery-core';
+export {
+  generateRecoveryCode,
+  KeywardRecoveryError,
+  normalizeRecoveryCode,
+  Recoverable,
+} from '@daflan/keyward-recovery-core';
 export type { KeywardRecoveryNativePlugin } from './definitions.js';
 export { NativePrfBridge } from './NativePrfBridge.js';
 export { NativePlugin } from './plugin.js';

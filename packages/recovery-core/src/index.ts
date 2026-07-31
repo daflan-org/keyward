@@ -11,6 +11,14 @@ export {
   unwrapDataKey,
   wrapDataKey,
 } from './envelope.js';
+export type { Argon2idParams } from './kdf.js';
+export {
+  argon2idIkm,
+  DEFAULT_ARGON2ID_PARAMS,
+  generateRecoveryCode,
+  normalizeRecoveryCode,
+  parseArgon2idParams,
+} from './kdf.js';
 export { KeywardRecoveryError, Recoverable } from './Recoverable.js';
 export type {
   Availability,

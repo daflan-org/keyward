@@ -8,8 +8,16 @@ import {
   unwrapDataKey,
   wrapDataKey,
 } from './envelope.js';
+import {
+  type Argon2idParams,
+  argon2idIkm,
+  assertRecoveryCodeStrength,
+  DEFAULT_ARGON2ID_PARAMS,
+  parseArgon2idParams,
+} from './kdf.js';
 import type {
   Availability,
+  CodeRecipient,
   EnrollContext,
   Envelope,
   NativePrf,
@@ -69,6 +77,44 @@ export class Recoverable {
     return openBlob(envelope.blob, dataKey);
   }
 
+  /**
+   * Recover the secret via the recovery-code anchor (Anchor 3): the universal
+   * backstop that works where passkey-PRF is unavailable (no-GMS / de-googled /
+   * iOS < 18.4) and no family member can re-seal. A wrong code fails the AES-GCM
+   * authentication and throws.
+   */
+  async recoverViaCode(scopeKey: string, code: string): Promise<Uint8Array> {
+    const envelope = await this.transport.get(scopeKey);
+    if (!envelope) {
+      throw new KeywardRecoveryError('not_found', `No recovery envelope for "${scopeKey}"`);
+    }
+    const codeRecipients = envelope.recipients.filter((r): r is CodeRecipient => r.kind === 'code');
+    if (codeRecipients.length === 0) {
+      throw new KeywardRecoveryError('no_code_anchor', 'Envelope has no recovery-code recipient');
+    }
+    // An envelope may hold more than one code recipient (e.g. a re-issued code via
+    // addRecipient). Try each; the right code unwraps exactly one, wrong codes fail
+    // the AES-GCM auth and move on.
+    const saltBytes = fromBase64Url(envelope.salt);
+    for (const recipient of codeRecipients) {
+      try {
+        const kek = await this.deriveCodeKek(
+          code,
+          saltBytes,
+          parseArgon2idParams(recipient.params),
+        );
+        const dataKey = await unwrapDataKey(recipient.wrap, kek);
+        return await openBlob(envelope.blob, dataKey);
+      } catch {
+        // Wrong code for this recipient (or malformed params); try the next.
+      }
+    }
+    throw new KeywardRecoveryError(
+      'code_recovery_failed',
+      'No recovery-code recipient matched the provided code',
+    );
+  }
+
   /** Which recovery anchors are usable on this device. */
   async availability(): Promise<Availability> {
     return { passkey: await this.native.capabilities() };
@@ -115,13 +161,28 @@ export class Recoverable {
         const wrap = await wrapDataKey(dataKey, kek);
         return { kind: 'social', memberId: spec.memberId, wrap };
       }
-      case 'code':
-        // Deferred in v1 (Argon2id is not in WebCrypto). The format reserves the kind.
-        throw new KeywardRecoveryError(
-          'code_recipient_deferred',
-          'recovery-code recipient is not implemented in v1',
+      case 'code': {
+        // Anchor 3: KEK = HKDF(Argon2id(code, envelope.salt, params)). The params
+        // are stored on the recipient so recoverViaCode reproduces the derivation.
+        assertRecoveryCodeStrength(spec.code);
+        const kek = await this.deriveCodeKek(
+          spec.code,
+          fromBase64Url(salt),
+          DEFAULT_ARGON2ID_PARAMS,
         );
+        const wrap = await wrapDataKey(dataKey, kek);
+        return { kind: 'code', kdf: 'argon2id', params: { ...DEFAULT_ARGON2ID_PARAMS }, wrap };
+      }
     }
+  }
+
+  /** code -> KEK: HKDF-SHA256(Argon2id(normalize(code), salt, params)). */
+  private async deriveCodeKek(
+    code: string,
+    salt: Uint8Array,
+    params: Argon2idParams,
+  ): Promise<CryptoKey> {
+    return deriveKek(await argon2idIkm(code, salt, params));
   }
 
   /** Enroll (or reuse) the user passkey and obtain a PRF output for `salt`. */
