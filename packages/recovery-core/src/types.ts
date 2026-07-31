@@ -69,7 +69,7 @@ export interface SocialRecipient {
   readonly wrap: string;
 }
 
-/** Optional last-resort recipient. Deferred in v1 (kind reserved in the format). */
+/** Last-resort recipient: KEK = HKDF(Argon2id(recovery code)). The universal backstop (Anchor 3). */
 export interface CodeRecipient {
   readonly kind: 'code';
   readonly kdf: 'argon2id';
